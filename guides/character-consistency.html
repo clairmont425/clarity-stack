@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Keeping an AI character's face consistent across a whole series</title>
+<meta name="description" content="Identity drift is the main reason AI character series look amateur. The cause, and the image-to-image anchoring settings that fix most of it."/>
+<link rel="canonical" href="https://clairmont425.github.io/clarity-stack/guides/character-consistency.html"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Clarity Stack"/>
+<meta property="og:title" content="Keeping an AI character's face consistent across a whole series"/>
+<meta property="og:description" content="Identity drift is the main reason AI character series look amateur. The cause, and the image-to-image anchoring settings that fix most of it."/>
+<meta property="og:url" content="https://clairmont425.github.io/clarity-stack/guides/character-consistency.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Montserrat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"/>
+<link rel="stylesheet" href="/clarity-stack/assets/site.css"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","url":"https://clairmont425.github.io/clarity-stack/guides/character-consistency.html","headline":"Keeping an AI character's face consistent across a whole series","description":"Identity drift is the main reason AI character series look amateur. The cause, and the image-to-image anchoring settings that fix most of it.","author":{"@type":"Person","name":"Nico Clairmont","affiliation":{"@type":"Organization","name":"Clarity Productions LLC"}},"publisher":{"@type":"Organization","name":"Clarity Stack"}}</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="/clarity-stack/"><b>Clarity<em>Stack</em></b><span>The AI tools behind the content</span></a>
+    <nav class="main"><a href="/clarity-stack/reviews/elevenlabs.html">Reviews</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html">Comparisons</a><a href="/clarity-stack/guides/character-consistency.html" aria-current="page">Guides</a><a href="/clarity-stack/gear/creator-starter-kit.html">Gear</a><a href="/clarity-stack/about.html">About</a></nav>
+  </div>
+</header>
+<div class="disc"><div><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></div></div>
+<main>
+  <p class="kicker">Guides</p>
+  <h1>Keeping one AI face consistent across a series</h1>
+  
+<p class="lede">If you generate a recurring character, drift is the thing that will give you away.
+Not resolution, not motion — the fact that she's subtly a different woman in shot four. Here's the
+cause and the fix, both of which took me longer to find than they should have.</p>
+
+<h2>The cause, stated precisely</h2>
+<p>Drift happens when scene images are generated <strong>from text prompts</strong> instead of being
+anchored to a canonical image. "25-year-old blonde surfer, freckles, golden tan" is a description of
+a <em>type</em>, not a person. Run it twice and you get two different people who both match the
+description. Pile up a series that way and the face wanders — a little per shot, obviously by the
+end.</p>
+
+<h2>The fix</h2>
+<ol>
+  <li><strong>Lock a canonical.</strong> One front-facing reference image, generated once, chosen
+      carefully, never regenerated. This file is now the character's identity. Mine is literally
+      <code>canonical_front.png</code> and everything points at it.</li>
+  <li><strong>Pass it as an image reference on every call.</strong> Not a text description of it —
+      the actual file, as the model's image input. This requires a model that accepts reference
+      images; it's the specific reason I use
+      <a href="/clarity-stack/reviews/gemini-nano-banana.html">Gemini's reference-capable image model</a> for
+      anything with a face.</li>
+  <li><strong>Use image-to-image at roughly 0.3 strength</strong> rather than fresh text-to-image.
+      Low enough to let pose, outfit and setting change; high enough that the face stays the same
+      face. That number is where it stopped looking wrong for me — treat it as a starting point and
+      nudge it for your character.</li>
+  <li><strong>Reuse scene references, regenerate the character pass.</strong> Lighting and
+      composition anchors are reusable across characters; the identity pass isn't. This is also how
+      you get a consistent <em>look</em>, not just a consistent face.</li>
+  <li><strong>Keep a rigid folder convention.</strong> Canonicals, face options, body options,
+      turnaround references and per-scene references in fixed paths. Sounds like housekeeping; it's
+      the thing that makes anchoring actually happen, because the right reference is always findable
+      by a script instead of by memory.</li>
+</ol>
+
+<h2>What this costs</h2>
+<p>Onboarding a new character properly — four canonical options plus a seven-image turnaround set at
+2K — came to <strong>$0.5544</strong> at the list prices on
+<a href="/clarity-stack/compare/ai-video-cost-per-video.html">the cost page</a>. One-time, about fifty-five cents,
+and it is the highest-leverage spend in the whole pipeline. Skipping it to save that is how you end
+up re-rendering a series.</p>
+
+<h2>What's still unsolved</h2>
+<p>Anchoring hugely reduces drift; it doesn't end it. Big pose changes, strong directional light and
+extreme close-ups still pull the face. And drift is not the only consistency problem — the
+<a href="/clarity-stack/compare/ai-lip-sync-tools.html">lip-sync models that flatten skin texture</a> will undo a
+perfectly anchored face in a single pass. Consistency has to survive the whole chain, not just the
+image step.</p>
+
+</main>
+<footer>
+  <div class="f-in">
+    <nav class="f-nav"><a href="/clarity-stack/about.html">About</a><a href="/clarity-stack/how-we-test.html">How I test</a><a href="/clarity-stack/disclosure.html">Disclosure</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html">AI lip sync: 4 tools tested</a><a href="/clarity-stack/compare/ai-video-cost-per-video.html">AI video: real cost per video</a><a href="/clarity-stack/gear/creator-starter-kit.html">Creator gear criteria</a><a href="/clarity-stack/guides/character-consistency.html">Character consistency</a><a href="/clarity-stack/guides/when-not-to-use-ai-video.html">When not to use AI video</a><a href="/clarity-stack/index.html">Home</a><a href="/clarity-stack/reviews/elevenlabs.html">ElevenLabs</a><a href="/clarity-stack/reviews/fal-kling.html">fal.ai + Kling</a><a href="/clarity-stack/reviews/gemini-nano-banana.html">Gemini image gen</a></nav>
+    <div class="f-disc">
+      <p><b>Clarity Stack</b> &mdash; first-hand notes on the AI tools behind the content, by Nico
+      Clairmont / Clarity Productions LLC, Irvine CA.</p>
+      <p><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></p>
+      <p>The video host on this site's channels is an AI-generated animated character, labelled as AI
+      on every platform that offers the label. She explains and demonstrates; she never claims to
+      have used a product. Statements of personal experience are Nico's own.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

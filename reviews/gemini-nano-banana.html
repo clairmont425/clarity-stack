@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Gemini image generation review — why it's my only engine for people</title>
+<meta name="description" content="Why Gemini became the only image engine I use for AI humans: reference-image anchoring, real per-image pricing, and when to use the text-only model instead."/>
+<link rel="canonical" href="https://clairmont425.github.io/clarity-stack/reviews/gemini-nano-banana.html"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Clarity Stack"/>
+<meta property="og:title" content="Gemini image generation review — why it's my only engine for people"/>
+<meta property="og:description" content="Why Gemini became the only image engine I use for AI humans: reference-image anchoring, real per-image pricing, and when to use the text-only model instead."/>
+<meta property="og:url" content="https://clairmont425.github.io/clarity-stack/reviews/gemini-nano-banana.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Montserrat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"/>
+<link rel="stylesheet" href="/clarity-stack/assets/site.css"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Review","url":"https://clairmont425.github.io/clarity-stack/reviews/gemini-nano-banana.html","name":"Gemini image generation review \u2014 why it's my only engine for people","author":{"@type":"Person","name":"Nico Clairmont","affiliation":{"@type":"Organization","name":"Clarity Productions LLC"}},"publisher":{"@type":"Organization","name":"Clarity Stack"}}</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="/clarity-stack/"><b>Clarity<em>Stack</em></b><span>The AI tools behind the content</span></a>
+    <nav class="main"><a href="/clarity-stack/reviews/elevenlabs.html" aria-current="page">Reviews</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html">Comparisons</a><a href="/clarity-stack/guides/character-consistency.html">Guides</a><a href="/clarity-stack/gear/creator-starter-kit.html">Gear</a><a href="/clarity-stack/about.html">About</a></nav>
+  </div>
+</header>
+<div class="disc"><div><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></div></div>
+<main>
+  <p class="kicker">Reviews</p>
+  <h1>Gemini image generation</h1>
+  
+
+<div class="verdict">
+  <div class="verdict-head"><span class="v-label">Verdict</span><span class="v-rating">Keep — standardised on it</span></div>
+  <p class="v-line">The reference-image input is the whole reason. Without an anchor, every image is a new person wearing the same description.</p>
+  <dl>
+    <dt>Worth it for</dt><dd>generated humans that must look like the same person in every shot</dd>
+    <dt>Skip it if</dt><dd>you need one perfect hero image of an object and identity is irrelevant</dd>
+  </dl>
+</div>
+
+
+<h2>The one feature that decided it</h2>
+<p>I generate recurring characters, so the only question that matters is whether the model will
+accept a canonical face as an <em>image</em> input and stay anchored to it. Gemini's pro image model
+does. I pass the same <code>canonical_front.png</code> on every single call, and the face and skin
+hold across shots.</p>
+<p>The counterpart model — Imagen 4 Ultra — is, to my eye, the better pure text-to-image
+photorealist, but it accepts <strong>no reference image at all</strong>. So the split in my pipeline
+is mechanical, not aesthetic:</p>
+<div class="tbl-wrap"><table>
+  <thead><tr><th>Shot</th><th>Model</th><th>Why</th></tr></thead>
+  <tbody>
+    <tr><td>Any face, any skin, any shot where it must be <em>this</em> person</td>
+        <td>Gemini pro image (reference-capable)</td>
+        <td>Canonical image goes in as a reference and anchors identity</td></tr>
+    <tr><td>Objects only — product, cityscape, food, abstract</td>
+        <td>Imagen 4 Ultra</td>
+        <td>Highest text-to-image realism; no identity to preserve, so the missing reference input
+            costs nothing</td></tr>
+  </tbody>
+</table></div>
+
+<h2>Pricing (list, checked 2026-11-02)</h2>
+<div class="tbl-wrap"><table>
+  <thead><tr><th>Resolution</th><th>Per image, standard tier</th></tr></thead>
+  <tbody>
+    <tr><td>1K</td><td>$0.0336</td></tr>
+    <tr><td>2K</td><td>$0.0504</td></tr>
+    <tr><td>4K</td><td>$0.1130</td></tr>
+  </tbody>
+</table></div>
+<p class="fineprint">Batch tier runs roughly half of standard. Source: <a class="out" href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="nofollow noopener">Gemini API pricing</a>.</p>
+<p>At three and a half cents a 1K image, stills are a rounding error next to video — six 5-second
+Kling clips cost more than sixty images. Generate more stills than you think you need and pick;
+that's the economically correct behaviour here, and it's the opposite of how video pricing wants you
+to work.</p>
+
+<h2>Honest limits</h2>
+<ul>
+  <li>Anchoring reduces drift, it doesn't eliminate it. Pose and lighting changes still pull the face.
+      See <a href="/clarity-stack/guides/character-consistency.html">character consistency</a> for the strength
+      setting that actually helps.</li>
+  <li>A reference-anchored image is slightly less "wow" than an unconstrained one. That's the trade:
+      consistency costs a little peak quality, and for series work it's worth it every time.</li>
+  <li>Prices here are list. Your effective cost depends on tier and region — check the page, not me.</li>
+</ul>
+
+</main>
+<footer>
+  <div class="f-in">
+    <nav class="f-nav"><a href="/clarity-stack/about.html">About</a><a href="/clarity-stack/how-we-test.html">How I test</a><a href="/clarity-stack/disclosure.html">Disclosure</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html">AI lip sync: 4 tools tested</a><a href="/clarity-stack/compare/ai-video-cost-per-video.html">AI video: real cost per video</a><a href="/clarity-stack/gear/creator-starter-kit.html">Creator gear criteria</a><a href="/clarity-stack/guides/character-consistency.html">Character consistency</a><a href="/clarity-stack/guides/when-not-to-use-ai-video.html">When not to use AI video</a><a href="/clarity-stack/index.html">Home</a><a href="/clarity-stack/reviews/elevenlabs.html">ElevenLabs</a><a href="/clarity-stack/reviews/fal-kling.html">fal.ai + Kling</a><a href="/clarity-stack/reviews/gemini-nano-banana.html">Gemini image gen</a></nav>
+    <div class="f-disc">
+      <p><b>Clarity Stack</b> &mdash; first-hand notes on the AI tools behind the content, by Nico
+      Clairmont / Clarity Productions LLC, Irvine CA.</p>
+      <p><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></p>
+      <p>The video host on this site's channels is an AI-generated animated character, labelled as AI
+      on every platform that offers the label. She explains and demonstrates; she never claims to
+      have used a product. Statements of personal experience are Nico's own.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

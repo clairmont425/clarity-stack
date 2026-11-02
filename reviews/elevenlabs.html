@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>ElevenLabs review — the voice layer in a working AI pipeline</title>
+<meta name="description" content="A production review of ElevenLabs text-to-speech: what it's good at, the API permission trap that cost me an afternoon, and real pricing checked 2026-11-02."/>
+<link rel="canonical" href="https://clairmont425.github.io/clarity-stack/reviews/elevenlabs.html"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Clarity Stack"/>
+<meta property="og:title" content="ElevenLabs review — the voice layer in a working AI pipeline"/>
+<meta property="og:description" content="A production review of ElevenLabs text-to-speech: what it's good at, the API permission trap that cost me an afternoon, and real pricing checked 2026-11-02."/>
+<meta property="og:url" content="https://clairmont425.github.io/clarity-stack/reviews/elevenlabs.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Montserrat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"/>
+<link rel="stylesheet" href="/clarity-stack/assets/site.css"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Review","url":"https://clairmont425.github.io/clarity-stack/reviews/elevenlabs.html","name":"ElevenLabs review \u2014 the voice layer in a working AI pipeline","author":{"@type":"Person","name":"Nico Clairmont","affiliation":{"@type":"Organization","name":"Clarity Productions LLC"}},"publisher":{"@type":"Organization","name":"Clarity Stack"}}</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="/clarity-stack/"><b>Clarity<em>Stack</em></b><span>The AI tools behind the content</span></a>
+    <nav class="main"><a href="/clarity-stack/reviews/elevenlabs.html" aria-current="page">Reviews</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html">Comparisons</a><a href="/clarity-stack/guides/character-consistency.html">Guides</a><a href="/clarity-stack/gear/creator-starter-kit.html">Gear</a><a href="/clarity-stack/about.html">About</a></nav>
+  </div>
+</header>
+<div class="disc"><div><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></div></div>
+<main>
+  <p class="kicker">Reviews</p>
+  <h1>ElevenLabs</h1>
+  
+
+<div class="verdict">
+  <div class="verdict-head"><span class="v-label">Verdict</span><span class="v-rating">Keep — the last tool I'd cut</span></div>
+  <p class="v-line">The voice quality stopped being the weak link in my pipeline about a year ago. Everything downstream of it is still the hard part.</p>
+  <dl>
+    <dt>Worth it for</dt><dd>narration, VO beds, and any pipeline where the voice carries the piece</dd>
+    <dt>Skip it if</dt><dd>you need a talking head whose mouth matches — that's a lip-sync problem, not a voice problem</dd>
+  </dl>
+</div>
+
+
+<h2>What I use it for</h2>
+<p>Every narration track in my pipeline is ElevenLabs. Script goes in, a voice ID comes back as
+audio, FFmpeg lays it under the picture. My animated host has a fixed assigned voice ID so the
+character sounds identical across a whole series — that consistency is the actual product, more than
+raw realism.</p>
+
+<h2>The part nobody mentions: API key scopes</h2>
+<p>This is the one thing I'd want to read before signing up. ElevenLabs API keys are scoped, and the
+scopes are not all enabled by default. My key authenticates fine for the endpoint that matters —
+<code>GET /v1/voices</code> returns 200 and synthesis works — but <code>GET /v1/user</code> returns
+<strong>401, "missing the permission user_read"</strong>.</p>
+<p>Practical consequence: <strong>you cannot read your own remaining credit balance programmatically
+unless you deliberately grant <code>user_read</code> when you create the key.</strong> If you're
+building anything that should stop before it blows through a quota, grant that scope at creation
+time. I didn't, and I spent real time assuming my key was broken when it was only narrow.</p>
+
+<h2>Pricing (checked 2026-11-02 — confirm on the vendor page, it moves)</h2>
+<div class="tbl-wrap"><table>
+  <thead><tr><th>Plan</th><th>Monthly</th><th>Credits/mo</th></tr></thead>
+  <tbody>
+    <tr><td>Free</td><td>$0</td><td>10k</td></tr>
+    <tr><td>Starter</td><td>$6 intro</td><td>30k</td></tr>
+    <tr><td>Creator</td><td>$22 (commonly 50% off the first month)</td><td>121k</td></tr>
+    <tr><td>Pro</td><td>$99</td><td>600k</td></tr>
+    <tr><td>Scale</td><td>$299</td><td>1.8M + 3 seats</td></tr>
+    <tr><td>Business</td><td>$990</td><td>6M + 10 seats</td></tr>
+  </tbody>
+</table></div>
+<p class="fineprint">Annual billing is advertised as twelve months for the price of ten. The intro
+versus standing price on the lower tiers was ambiguous on the page the day I read it, so treat the
+two cheapest rows as "roughly this, verify at checkout" rather than gospel. Source:
+<a class="out" href="https://elevenlabs.io/" target="_blank" rel="nofollow noopener">elevenlabs.io/pricing</a>.</p>
+
+<h2>Where it sits in the stack</h2>
+<p>Marginal cost per video is effectively zero once you're on a subscription, which changes how you
+work: I re-record narration freely instead of protecting a take. That's the real unlock of
+synthetic voice for short-form — not that it's cheap, but that revision is free.</p>
+
+<h2>Honest limits</h2>
+<ul>
+  <li>It produces audio, not performance. Dense, emotionally-specific reads still sound like a very
+      good machine.</li>
+  <li>Credits disappear faster than you'd expect when you iterate on long scripts.</li>
+  <li>It makes the <a href="/clarity-stack/compare/ai-lip-sync-tools.html">lip-sync problem</a> worse, in a sense:
+      the audio is now good enough that a mismatched mouth is the only thing a viewer notices.</li>
+</ul>
+
+</main>
+<footer>
+  <div class="f-in">
+    <nav class="f-nav"><a href="/clarity-stack/about.html">About</a><a href="/clarity-stack/how-we-test.html">How I test</a><a href="/clarity-stack/disclosure.html">Disclosure</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html">AI lip sync: 4 tools tested</a><a href="/clarity-stack/compare/ai-video-cost-per-video.html">AI video: real cost per video</a><a href="/clarity-stack/gear/creator-starter-kit.html">Creator gear criteria</a><a href="/clarity-stack/guides/character-consistency.html">Character consistency</a><a href="/clarity-stack/guides/when-not-to-use-ai-video.html">When not to use AI video</a><a href="/clarity-stack/index.html">Home</a><a href="/clarity-stack/reviews/elevenlabs.html">ElevenLabs</a><a href="/clarity-stack/reviews/fal-kling.html">fal.ai + Kling</a><a href="/clarity-stack/reviews/gemini-nano-banana.html">Gemini image gen</a></nav>
+    <div class="f-disc">
+      <p><b>Clarity Stack</b> &mdash; first-hand notes on the AI tools behind the content, by Nico
+      Clairmont / Clarity Productions LLC, Irvine CA.</p>
+      <p><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></p>
+      <p>The video host on this site's channels is an AI-generated animated character, labelled as AI
+      on every platform that offers the label. She explains and demonstrates; she never claims to
+      have used a product. Statements of personal experience are Nico's own.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

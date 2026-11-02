@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>fal.ai + Kling 2.5 Turbo Pro review — image-to-video, priced by the second</title>
+<meta name="description" content="Production review of Kling 2.5 Turbo Pro on fal.ai: face quality, the per-second price model, and the one job it got wrong every time."/>
+<link rel="canonical" href="https://clairmont425.github.io/clarity-stack/reviews/fal-kling.html"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Clarity Stack"/>
+<meta property="og:title" content="fal.ai + Kling 2.5 Turbo Pro review — image-to-video, priced by the second"/>
+<meta property="og:description" content="Production review of Kling 2.5 Turbo Pro on fal.ai: face quality, the per-second price model, and the one job it got wrong every time."/>
+<meta property="og:url" content="https://clairmont425.github.io/clarity-stack/reviews/fal-kling.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Montserrat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"/>
+<link rel="stylesheet" href="/clarity-stack/assets/site.css"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Review","url":"https://clairmont425.github.io/clarity-stack/reviews/fal-kling.html","name":"fal.ai + Kling 2.5 Turbo Pro review \u2014 image-to-video, priced by the second","author":{"@type":"Person","name":"Nico Clairmont","affiliation":{"@type":"Organization","name":"Clarity Productions LLC"}},"publisher":{"@type":"Organization","name":"Clarity Stack"}}</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="/clarity-stack/"><b>Clarity<em>Stack</em></b><span>The AI tools behind the content</span></a>
+    <nav class="main"><a href="/clarity-stack/reviews/elevenlabs.html" aria-current="page">Reviews</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html">Comparisons</a><a href="/clarity-stack/guides/character-consistency.html">Guides</a><a href="/clarity-stack/gear/creator-starter-kit.html">Gear</a><a href="/clarity-stack/about.html">About</a></nav>
+  </div>
+</header>
+<div class="disc"><div><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></div></div>
+<main>
+  <p class="kicker">Reviews</p>
+  <h1>fal.ai + Kling 2.5 Turbo Pro</h1>
+  
+
+<div class="verdict">
+  <div class="verdict-head"><span class="v-label">Verdict</span><span class="v-rating">Keep — with a hard boundary</span></div>
+  <p class="v-line">The best face-preserving image-to-video I've paid for, and completely unusable for the one job I most wanted it for.</p>
+  <dl>
+    <dt>Worth it for</dt><dd>putting motion into a generated human still while keeping the face intact</dd>
+    <dt>Skip it if</dt><dd>anything with legible text, a logo or a printed graphic in frame</dd>
+  </dl>
+</div>
+
+
+<h2>Why Kling, specifically</h2>
+<p>I compared it against the alternatives on the same source stills, judging one thing: does the
+face survive? Kling's did. Seedance 2.0 smoothed skin into a pasty, pore-free Instagram-filter
+face even with seven reference images. Veo 3.1 has the best native audio of the three and a face too
+cartoony to use. For face-forward work Kling is the only one of the three I'll run — the full
+side-by-side is in <a href="/clarity-stack/compare/ai-lip-sync-tools.html">the lip-sync comparison</a>.</p>
+
+<h2>Pricing: read the per-second model before you plan a project</h2>
+<p>Kling 2.5 Turbo Pro image-to-video on fal is quoted on the model page as
+<strong>$0.35 for a 5-second video, plus $0.07 for every additional second</strong>
+(<a class="out" href="https://fal.ai/models/fal-ai/kling-video/v2.5-turbo/pro/image-to-video" target="_blank" rel="nofollow noopener">fal model page</a>, checked 2026-11-02).</p>
+<p>That's $0.07/sec at the margin and $0.07/sec on average — a flat rate dressed up as a base fee.
+What it means in practice: <strong>length is cheap, retries are not.</strong> A 30-second piece built
+as six 5-second clips costs $2.10 in video. Three failed attempts at one of those clips costs you
+another $1.05 and buys nothing. Budget for the retries, not the runtime — the honest line-by-line
+build is on <a href="/clarity-stack/compare/ai-video-cost-per-video.html">the cost page</a>.</p>
+
+<h2>The failure that set a permanent rule</h2>
+<p>I needed a product video: a t-shirt with a printed graphic, with a gentle push-in. Every Kling run
+<strong>morphed the print</strong> — the artwork breathed, letters bent, the design drifted frame to
+frame. It wasn't a prompt problem. Generative video has no concept of "this region is a fixed asset
+and must stay pixel-exact".</p>
+<p>So I stopped generating that shot and built it in code instead: resample the real print file into
+every frame against the garment photo. Pixel-exact at every zoom, zero dollars, deterministic. The
+whole reasoning is in <a href="/clarity-stack/guides/when-not-to-use-ai-video.html">when not to use AI video</a>.
+The rule it left me with: <strong>generative video for faces and motion, code for anything that must
+stay exactly itself.</strong></p>
+
+<h2>Notes on fal as a platform</h2>
+<ul>
+  <li>Model-per-endpoint, pay-per-call, no seat fee — the right shape for pipeline work.</li>
+  <li>Endpoint paths are specific and version-sensitive; the multi-reference Seedance route, for
+      instance, is a different path than the obvious image-to-video one. Read the model page rather
+      than guessing a URL.</li>
+  <li>A 404 on a job ID means your key authenticated and the job simply isn't there. Useful signal
+      when you're debugging auth: 404 is good news, 401 is the bad one.</li>
+  <li>No affiliate program I could find as of 2026-11-02, which is why this review has nothing to
+      sell you.</li>
+</ul>
+
+</main>
+<footer>
+  <div class="f-in">
+    <nav class="f-nav"><a href="/clarity-stack/about.html">About</a><a href="/clarity-stack/how-we-test.html">How I test</a><a href="/clarity-stack/disclosure.html">Disclosure</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html">AI lip sync: 4 tools tested</a><a href="/clarity-stack/compare/ai-video-cost-per-video.html">AI video: real cost per video</a><a href="/clarity-stack/gear/creator-starter-kit.html">Creator gear criteria</a><a href="/clarity-stack/guides/character-consistency.html">Character consistency</a><a href="/clarity-stack/guides/when-not-to-use-ai-video.html">When not to use AI video</a><a href="/clarity-stack/index.html">Home</a><a href="/clarity-stack/reviews/elevenlabs.html">ElevenLabs</a><a href="/clarity-stack/reviews/fal-kling.html">fal.ai + Kling</a><a href="/clarity-stack/reviews/gemini-nano-banana.html">Gemini image gen</a></nav>
+    <div class="f-disc">
+      <p><b>Clarity Stack</b> &mdash; first-hand notes on the AI tools behind the content, by Nico
+      Clairmont / Clarity Productions LLC, Irvine CA.</p>
+      <p><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></p>
+      <p>The video host on this site's channels is an AI-generated animated character, labelled as AI
+      on every platform that offers the label. She explains and demonstrates; she never claims to
+      have used a product. Statements of personal experience are Nico's own.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

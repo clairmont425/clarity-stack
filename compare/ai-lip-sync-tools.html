@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>I tested 4 ways to lip-sync an AI presenter — all 4 failed</title>
+<meta name="description" content="LatentSync, Seedance 2.0, Veo 3.1 and FFmpeg overlay tested on the same AI presenter shot. What each does to the face, why none shipped, and the format that works anyway."/>
+<link rel="canonical" href="https://clairmont425.github.io/clarity-stack/compare/ai-lip-sync-tools.html"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Clarity Stack"/>
+<meta property="og:title" content="I tested 4 ways to lip-sync an AI presenter — all 4 failed"/>
+<meta property="og:description" content="LatentSync, Seedance 2.0, Veo 3.1 and FFmpeg overlay tested on the same AI presenter shot. What each does to the face, why none shipped, and the format that works anyway."/>
+<meta property="og:url" content="https://clairmont425.github.io/clarity-stack/compare/ai-lip-sync-tools.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Montserrat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"/>
+<link rel="stylesheet" href="/clarity-stack/assets/site.css"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","url":"https://clairmont425.github.io/clarity-stack/compare/ai-lip-sync-tools.html","headline":"I tested 4 ways to lip-sync an AI presenter \u2014 all 4 failed","description":"LatentSync, Seedance 2.0, Veo 3.1 and FFmpeg overlay tested on the same AI presenter shot. What each does to the face, why none shipped, and the format that works anyway.","author":{"@type":"Person","name":"Nico Clairmont","affiliation":{"@type":"Organization","name":"Clarity Productions LLC"}},"publisher":{"@type":"Organization","name":"Clarity Stack"}}</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="/clarity-stack/"><b>Clarity<em>Stack</em></b><span>The AI tools behind the content</span></a>
+    <nav class="main"><a href="/clarity-stack/reviews/elevenlabs.html">Reviews</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html" aria-current="page">Comparisons</a><a href="/clarity-stack/guides/character-consistency.html">Guides</a><a href="/clarity-stack/gear/creator-starter-kit.html">Gear</a><a href="/clarity-stack/about.html">About</a></nav>
+  </div>
+</header>
+<div class="disc"><div><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></div></div>
+<main>
+  <p class="kicker">Comparisons</p>
+  <h1>Four ways to lip-sync an AI presenter. None of them shipped.</h1>
+  
+<p class="lede">This is the piece of research I'd have paid for before starting. I needed one thing:
+a generated presenter whose mouth matches an ElevenLabs narration track, without wrecking the face.
+I tried four approaches on the same shot. I'm still not shipping a talking head.</p>
+
+
+<p class="method-note">Everything below comes out of production work, not a trial account opened to
+write a review. Where I have numbers, they were computed in code and I show the arithmetic. Where I
+don't, I say so instead of rounding a guess into a fact. <a href="/clarity-stack/how-we-test.html">How I
+test &rarr;</a></p>
+
+
+<h2>The test</h2>
+<p>Same source character, same script, same narration audio. One judgement call, made by eye on the
+rendered file: <strong>would I put this in front of a client?</strong> Not a benchmark score — a
+go/no-go, which is the only question that matters when you're the one delivering.</p>
+
+<h2>Results</h2>
+<div class="tbl-wrap"><table class="wide">
+  <thead><tr><th>Approach</th><th>Sync quality</th><th>What it does to the face</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Kling + LatentSync</strong><br><span class="fineprint">post-hoc sync onto good video</span></td>
+        <td>Functional but robotic — doesn't track the cadence of the audio</td>
+        <td>Leaves Kling's face quality intact</td>
+        <td class="no">No — obviously wrong to anyone watching</td></tr>
+    <tr><td><strong>Seedance 2.0 native</strong><br><span class="fineprint">reference-to-video, built-in audio</span></td>
+        <td><strong>Best sync of the four</strong></td>
+        <td>Flattens it. Pasty, pore-free, Instagram-filter skin — no freckles, no texture. Still flat
+            with seven reference images.</td>
+        <td class="no">No — good sync on a face I can't use</td></tr>
+    <tr><td><strong>Veo 3.1</strong></td>
+        <td>Good, with the best native audio</td>
+        <td>Cartoony. Face quality too low for photoreal work.</td>
+        <td class="no">No</td></tr>
+    <tr><td><strong>FFmpeg audio overlay</strong></td>
+        <td>None whatsoever — it just lays audio over picture</td>
+        <td>Nothing, it's a mux</td>
+        <td class="no">No, and worth stating plainly because it's the "free" option people reach for
+            first</td></tr>
+  </tbody>
+</table></div>
+
+<h2>The pattern</h2>
+<p>Every tool trades one for the other. <strong>The models with the best lip sync generate the face
+themselves, and their faces are worse. The best face comes from a model that doesn't do audio, and
+bolting sync on afterwards looks bolted on.</strong> Nothing in this set gives you premium sync
+<em>and</em> preserved skin detail, and that's not a prompt-engineering gap — it's where the two
+families of model are architecturally.</p>
+
+<h2>What I do instead (and it's better content anyway)</h2>
+<p>I stopped treating a talking head as a requirement and designed the format so there isn't one:</p>
+<ul>
+  <li><strong>Host appears, host doesn't speak on camera.</strong> She's in the hook and the close as
+      picture; the narration runs over B-roll, screen capture and text.</li>
+  <li><strong>The middle of the video is a real screen recording</strong> of the thing being
+      discussed. No mouth, and far better proof than a face claiming something.</li>
+  <li><strong>Text on screen</strong> carries the lines where a human would need lip movement.</li>
+</ul>
+<p>The constraint improved the work. A mouth that doesn't match reads as fake and tanks trust; a
+clean screen recording with good narration reads as competent. I'd now choose this format even if
+lip sync were solved.</p>
+
+<h2>Still open</h2>
+<p>The gap in this test: I haven't personally run HeyGen, D-ID, Wav2Lip or SadTalker on the same
+shot. They're the obvious next candidates and I won't have an opinion worth reading until I do. When
+I run them, the results land on this page with the same go/no-go.</p>
+
+</main>
+<footer>
+  <div class="f-in">
+    <nav class="f-nav"><a href="/clarity-stack/about.html">About</a><a href="/clarity-stack/how-we-test.html">How I test</a><a href="/clarity-stack/disclosure.html">Disclosure</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html">AI lip sync: 4 tools tested</a><a href="/clarity-stack/compare/ai-video-cost-per-video.html">AI video: real cost per video</a><a href="/clarity-stack/gear/creator-starter-kit.html">Creator gear criteria</a><a href="/clarity-stack/guides/character-consistency.html">Character consistency</a><a href="/clarity-stack/guides/when-not-to-use-ai-video.html">When not to use AI video</a><a href="/clarity-stack/index.html">Home</a><a href="/clarity-stack/reviews/elevenlabs.html">ElevenLabs</a><a href="/clarity-stack/reviews/fal-kling.html">fal.ai + Kling</a><a href="/clarity-stack/reviews/gemini-nano-banana.html">Gemini image gen</a></nav>
+    <div class="f-disc">
+      <p><b>Clarity Stack</b> &mdash; first-hand notes on the AI tools behind the content, by Nico
+      Clairmont / Clarity Productions LLC, Irvine CA.</p>
+      <p><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></p>
+      <p>The video host on this site's channels is an AI-generated animated character, labelled as AI
+      on every platform that offers the label. She explains and demonstrates; she never claims to
+      have used a product. Statements of personal experience are Nico's own.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>

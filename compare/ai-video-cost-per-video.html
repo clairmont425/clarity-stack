@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>What a 30-second AI video actually costs — line by line</title>
+<meta name="description" content="The real per-piece API cost of a 30-second AI video at list prices: six Kling clips, host stills, scene refs, narration. Arithmetic shown."/>
+<link rel="canonical" href="https://clairmont425.github.io/clarity-stack/compare/ai-video-cost-per-video.html"/>
+<meta name="robots" content="index,follow,max-image-preview:large"/>
+<meta property="og:type" content="article"/>
+<meta property="og:site_name" content="Clarity Stack"/>
+<meta property="og:title" content="What a 30-second AI video actually costs — line by line"/>
+<meta property="og:description" content="The real per-piece API cost of a 30-second AI video at list prices: six Kling clips, host stills, scene refs, narration. Arithmetic shown."/>
+<meta property="og:url" content="https://clairmont425.github.io/clarity-stack/compare/ai-video-cost-per-video.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=Montserrat:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"/>
+<link rel="stylesheet" href="/clarity-stack/assets/site.css"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Article","url":"https://clairmont425.github.io/clarity-stack/compare/ai-video-cost-per-video.html","headline":"What a 30-second AI video actually costs \u2014 line by line","description":"The real per-piece API cost of a 30-second AI video at list prices: six Kling clips, host stills, scene refs, narration. Arithmetic shown.","author":{"@type":"Person","name":"Nico Clairmont","affiliation":{"@type":"Organization","name":"Clarity Productions LLC"}},"publisher":{"@type":"Organization","name":"Clarity Stack"}}</script>
+</head>
+<body>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="/clarity-stack/"><b>Clarity<em>Stack</em></b><span>The AI tools behind the content</span></a>
+    <nav class="main"><a href="/clarity-stack/reviews/elevenlabs.html">Reviews</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html" aria-current="page">Comparisons</a><a href="/clarity-stack/guides/character-consistency.html">Guides</a><a href="/clarity-stack/gear/creator-starter-kit.html">Gear</a><a href="/clarity-stack/about.html">About</a></nav>
+  </div>
+</header>
+<div class="disc"><div><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></div></div>
+<main>
+  <p class="kicker">Comparisons</p>
+  <h1>What a 30-second AI video actually costs</h1>
+  
+<p class="lede">"Cheaper than a film crew" is true and useless. Here is the actual line-by-line API
+cost of one 30-second piece out of my pipeline, at list prices, with the arithmetic visible so you
+can re-run it on your own build.</p>
+
+<h2>Unit prices (list, checked 2026-11-02)</h2>
+<ul>
+  <li><strong>Kling 2.5 Turbo Pro image-to-video on fal:</strong> $0.35 for 5s, +$0.07 per extra
+      second &rarr; a 5-second clip is <strong>$0.35</strong>. (<a class="out" href="https://fal.ai/models/fal-ai/kling-video/v2.5-turbo/pro/image-to-video" target="_blank" rel="nofollow noopener">source</a>)</li>
+  <li><strong>Gemini image generation, standard tier:</strong> $0.0336 at 1K, $0.0504 at 2K,
+      $0.1130 at 4K. (<a class="out" href="https://ai.google.dev/gemini-api/docs/pricing" target="_blank" rel="nofollow noopener">source</a>)</li>
+  <li><strong>ElevenLabs narration:</strong> $0 marginal on an existing subscription — the plan is a
+      fixed cost, so it doesn't belong in per-piece maths.</li>
+  <li><strong>Edit, assembly, captions, 9:16 reframe:</strong> $0. FFmpeg and Python.</li>
+</ul>
+
+<h2>One 30-second piece</h2>
+<div class="tbl-wrap"><table>
+  <thead><tr><th>Component</th><th>Build</th><th>Cost</th></tr></thead>
+  <tbody>
+    <tr><td>Motion</td><td>6 &times; 5s Kling clips @ $0.35</td><td>$2.1000</td></tr>
+    <tr><td>Host stills</td><td>2 @ 1K ($0.0336)</td><td>$0.0672</td></tr>
+    <tr><td>Scene references</td><td>4 @ 1K ($0.0336)</td><td>$0.1344</td></tr>
+    <tr><td>Narration</td><td>covered by subscription</td><td>$0.0000</td></tr>
+    <tr class="total"><td colspan="2">Total per 30-second piece</td><td>$2.3016</td></tr>
+  </tbody>
+</table></div>
+
+<h2>The other formats, same method</h2>
+<div class="tbl-wrap"><table>
+  <thead><tr><th>Deliverable</th><th>Build</th><th>Cost</th></tr></thead>
+  <tbody>
+    <tr><td>15-second piece</td><td>3 clips + 2 stills + 2 refs (1K)</td><td>$1.1844</td></tr>
+    <tr><td>Static vertical image (pin/post)</td><td>2 images @ 2K</td><td>$0.1008</td></tr>
+    <tr><td>Onboarding a new character (one-time)</td><td>4 canonical + 7 turnaround refs @ 2K</td><td>$0.5544</td></tr>
+  </tbody>
+</table></div>
+
+<h2>What the numbers actually tell you</h2>
+<ol>
+  <li><strong>Video is 91% of the cost of a video.</strong> $2.10 of $2.3016. Every image in the
+      piece together costs less than one 5-second clip. So iterate hard on stills — they're free by
+      comparison — and only commit to motion once the frame is right.</li>
+  <li><strong>Retries are the real budget.</strong> At $0.35 a clip, three bad attempts on one shot
+      costs more than every still in the project. The expensive mistake is generating motion from a
+      still you weren't sure about.</li>
+  <li><strong>Volume is not the constraint people think it is.</strong> Thirty pieces of this kind
+      costs <strong>under $70</strong> in generation. Which is the uncomfortable finding: if output
+      volume were the bottleneck, $70 would fix it. It never is. Distribution is.</li>
+  <li><strong>$10/week buys</strong> four 30-second pieces, or eight 15-second pieces, or 99 static
+      images. A realistic mix — two 30s, one 15s, eight images — is $6.594, leaving headroom for the
+      retries in point 2.</li>
+</ol>
+<p class="fineprint">All figures are list price and exclude the fixed subscriptions underneath
+(ElevenLabs plan, storage, my time). They're a floor, not a quote.</p>
+
+</main>
+<footer>
+  <div class="f-in">
+    <nav class="f-nav"><a href="/clarity-stack/about.html">About</a><a href="/clarity-stack/how-we-test.html">How I test</a><a href="/clarity-stack/disclosure.html">Disclosure</a><a href="/clarity-stack/compare/ai-lip-sync-tools.html">AI lip sync: 4 tools tested</a><a href="/clarity-stack/compare/ai-video-cost-per-video.html">AI video: real cost per video</a><a href="/clarity-stack/gear/creator-starter-kit.html">Creator gear criteria</a><a href="/clarity-stack/guides/character-consistency.html">Character consistency</a><a href="/clarity-stack/guides/when-not-to-use-ai-video.html">When not to use AI video</a><a href="/clarity-stack/index.html">Home</a><a href="/clarity-stack/reviews/elevenlabs.html">ElevenLabs</a><a href="/clarity-stack/reviews/fal-kling.html">fal.ai + Kling</a><a href="/clarity-stack/reviews/gemini-nano-banana.html">Gemini image gen</a></nav>
+    <div class="f-disc">
+      <p><b>Clarity Stack</b> &mdash; first-hand notes on the AI tools behind the content, by Nico
+      Clairmont / Clarity Productions LLC, Irvine CA.</p>
+      <p><b>Disclosure:</b> no affiliate relationship on this site is active and <b>no link here earns me anything.</b> Every link is a plain vendor link. <a href="/clarity-stack/disclosure.html">Why this notice is here anyway &rarr;</a></p>
+      <p>The video host on this site's channels is an AI-generated animated character, labelled as AI
+      on every platform that offers the label. She explains and demonstrates; she never claims to
+      have used a product. Statements of personal experience are Nico's own.</p>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
